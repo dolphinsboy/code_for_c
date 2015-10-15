@@ -12,5 +12,9 @@ test_glib:test_glib.c
 	gcc -g -c -Wall test_glib.c $(GLIB_DIR) 
 	gcc -o test_glib test_glib.o $(GLIB_LIB)
 
+util:util.c
+	gcc -g -c util.c $(GLIB_DIR) 
+	gcc -o util util.o $(GLIB_LIB)
+
 clean:
-	rm -rf test test_glib *.o
+	rm -rf test test_glib *.o util
