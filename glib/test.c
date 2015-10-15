@@ -53,6 +53,8 @@ void start_dump(MYSQL *conn)
                    printf("%s\n", row[i] ? row[i] : "NULL");
             }
         }
+
+        mysql_free_result(res);
     }
 
 }
