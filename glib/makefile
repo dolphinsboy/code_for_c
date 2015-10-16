@@ -1,7 +1,7 @@
 GLIB_DIR = -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include
 GLIB_LIB = -pthread -lgthread-2.0 -lglib-2.0
-MYSQL_LIB = -L/usr/lib64/mysql/ -l mysqlclient
-MYSQL_INCLUDE = -I /usr/include/mysql/
+MYSQL_LIB = -L/data1/guosong/mysql5616/lib/ -l mysqlclient
+MYSQL_INCLUDE = -I /data1/guosong/mysql5616/include
 
 test:test.c
 	gcc -g -c test.c $(GLIB_DIR) $(MYSQL_INCLUDE)
@@ -15,6 +15,13 @@ test_glib:test_glib.c
 util:util.c
 	gcc -g -c util.c $(GLIB_DIR) 
 	gcc -o util util.o $(GLIB_LIB)
+str:string.c
+	gcc -g -c string.c $(GLIB_DIR)
+	gcc -o str string.o $(GLIB_LIB)
+
+binlog:binlog.c
+	gcc -g -c binlog.c $(MYSQL_INCLUDE)
+	gcc -o binlog binlog.o $(MYSQL_LIB)
 
 clean:
-	rm -rf test test_glib *.o util
+	rm -rf test test_glib *.o util str binlog

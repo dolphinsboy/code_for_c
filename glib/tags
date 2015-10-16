@@ -1,0 +1,44 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Arg	test_glib.c	/^typedef struct _Arg Arg;$/;"	t	typeref:struct:_Arg	file:
+ERR_EOF	binlog.c	/^    ERR_EOF,$/;"	e	enum:Error_Code	file:
+ERR_FAIL	binlog.c	/^    ERR_FAIL$/;"	e	enum:Error_Code	file:
+ERR_OK	binlog.c	/^    ERR_OK =0,$/;"	e	enum:Error_Code	file:
+Error_Code	binlog.c	/^enum Error_Code{$/;"	g	file:
+GLIB_DIR	makefile	/^GLIB_DIR = -I\/usr\/include\/glib-2.0 -I\/usr\/lib64\/glib-2.0\/include$/;"	m
+GLIB_LIB	makefile	/^GLIB_LIB = -pthread -lgthread-2.0 -lglib-2.0$/;"	m
+MYSQL_INCLUDE	makefile	/^MYSQL_INCLUDE = -I \/data1\/guosong\/mysql5616\/include$/;"	m
+MYSQL_LIB	makefile	/^MYSQL_LIB = -L\/data1\/guosong\/mysql5616\/lib\/ -l mysqlclient$/;"	m
+_Arg	test_glib.c	/^struct _Arg{$/;"	s	file:
+common_entries	test.c	/^GOptionEntry common_entries[] ={$/;"	v
+create_main_connection	binlog.c	/^MYSQL *create_main_connection()$/;"	f
+create_main_connection	test.c	/^MYSQL *create_main_connection()$/;"	f
+hostname	binlog.c	/^char *hostname = "10.75.19.81";$/;"	v
+hostname	test.c	/^char *hostname = NULL;$/;"	v
+loop	test_glib.c	/^    GMainLoop *loop;$/;"	m	struct:_Arg	file:
+main	binlog.c	/^int main(int argc, char **argv[])$/;"	f
+main	string.c	/^int main(int argc, char **argv[])$/;"	f
+main	test.c	/^int main(int argc, char *argv[]){$/;"	f
+main	test_glib.c	/^int main(int argc, char *argv[])$/;"	f
+main	util.c	/^int main(int argc, char *argv[])$/;"	f
+max	test_glib.c	/^    gint max;$/;"	m	struct:_Arg	file:
+mutex	test_glib.c	/^static GMutex*mutex = NULL;$/;"	v	file:
+net_store_data	binlog.c	/^uchar *net_store_data(uchar *destination, const uchar *source, size_t length)$/;"	f
+passwd	binlog.c	/^char *passwd = "test123";$/;"	v
+password	test.c	/^char *password = "test123";$/;"	v
+port	binlog.c	/^int port = 9001;$/;"	v
+port	test.c	/^guint port = 3306;$/;"	v
+register_slave	binlog.c	/^int register_slave(MYSQL *conn)$/;"	f
+run_1	test_glib.c	/^void run_1(Arg *arg)$/;"	f
+run_2	test_glib.c	/^void run_2(Arg *arg)$/;"	f
+run_3	test_glib.c	/^void run_3(Arg *arg)$/;"	f
+start_dump	binlog.c	/^void start_dump(MYSQL *conn)$/;"	f
+start_dump	test.c	/^void start_dump(MYSQL *conn)$/;"	f
+t1_end	test_glib.c	/^static gboolean t1_end = FALSE;$/;"	v	file:
+t2_end	test_glib.c	/^static gboolean t2_end = FALSE;$/;"	v	file:
+username	binlog.c	/^char *username = "test";$/;"	v
+username	test.c	/^char *username = "test";$/;"	v
