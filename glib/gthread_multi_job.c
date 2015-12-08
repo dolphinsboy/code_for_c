@@ -42,7 +42,9 @@ void *process_queue(struct thread_data* td)
 
         switch(jb->type){
             case JOB_TEST1:
-                g_message("JOB_TEST1 in thread %d" , td->thread_id);
+                mjb = (struct migrate_job *)jb->data;
+
+                g_message("JOB_TEST1 in thread %d, keyname=%s" , td->thread_id, mjb->keyname);
 
                 g_free(jb);
                 break;
@@ -61,17 +63,17 @@ void *process_queue(struct thread_data* td)
     }
 }
 
-void add_job(struct configuration* conf)
+void add_job(struct configuration* conf, char *keyname, char*host, int port)
 {
     struct job *j = g_new0(struct job, 1);
     struct migrate_job *mj = g_new0(struct migrate_job, 1);
     j->data = (void*) mj;
 
-    j->type = JOB_TEST2;
+    j->type = JOB_TEST1;
 
-    mj->keyname = "test";
-    mj->host = "localhost";
-    mj->port = 3303;
+    mj->keyname = keyname;
+    mj->host =  host;
+    mj->port = port;
 
     g_async_queue_push(conf->queue, j);
 
@@ -79,7 +81,7 @@ void add_job(struct configuration* conf)
 
 int main(int argc, char *argv[])
 {
-    guint n_threads = 3;
+    guint n_threads = 10;
     guint n;
 
     struct configuration conf= { NULL, NULL, NULL, 0 };
@@ -103,12 +105,13 @@ int main(int argc, char *argv[])
 
     g_message("%d threads created", n_threads);
 
-    add_job(&conf);
-    add_job(&conf);
-    add_job(&conf);
-    add_job(&conf);
-    add_job(&conf);
-    add_job(&conf);
+    add_job(&conf,"TEST1","10", 3305);
+    add_job(&conf,"TEST2","11", 3306);
+    add_job(&conf,"TEST3","12", 3307);
+    add_job(&conf,"TEST4","13", 3308);
+    add_job(&conf,"TEST5","14", 3309);
+    add_job(&conf,"TEST6","14", 3309);
+    add_job(&conf,"TEST7","14", 3309);
 
     for (n = 0; n < n_threads; n++){
         struct job * jb = g_new0(struct job, 1);
