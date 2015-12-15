@@ -7,6 +7,8 @@ c or c plus code demo/test
 +  glib+thread
 +  glib+option
 +  glib+log file
++  glib+config file parse
+[https://developer.gnome.org/glib/stable/glib-Key-value-file-parser.html#g-key-file-get-value](https://developer.gnome.org/glib/stable/glib-Key-value-file-parser.html#g-key-file-get-value)
 
 Glib相关demo
 
