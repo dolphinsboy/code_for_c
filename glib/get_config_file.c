@@ -41,7 +41,7 @@ struct config* get_config_fromfile(char *conf_file)
         return NULL;
     }
 
-    if (FALSE == g_key_file_load_from_file(key_file, conf_file, G_KEY_FILE_NONE, &gerror))
+    if (FALSE == g_key_file_load_from_file(key_file, conf_file, G_KEY_FILE_KEEP_COMMENTS, &gerror))
     {
         printf("g_key_file_load_from_file false, Error=%s,file=%s\n", gerror->message,conf_file);
         return NULL;
@@ -69,7 +69,17 @@ struct config* get_config_fromfile(char *conf_file)
        for( j = 0; j < keys_len; j++){
            value = g_key_file_get_string(key_file, groups[i],keys[j], &gerror); 
            printf("key=%s, value=%s\n", keys[j], value);
+
+           if (strcmp(keys[j], "port") == 0)
+           {
+               g_key_file_set_int64(key_file, groups[i], keys[j], 5000);
+           }
        }
+    }
+
+    if (FALSE == g_key_file_save_to_file(key_file, conf_file, &gerror))
+    {
+        printf("Failed to save, error=%s\n", gerror->message);
     }
 
 }
