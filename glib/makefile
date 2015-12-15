@@ -23,5 +23,9 @@ binlog:binlog.c
 	gcc -g -c binlog.c $(MYSQL_INCLUDE)
 	gcc -o binlog binlog.o $(MYSQL_LIB)
 
+get_config_file:get_config_file.c
+	gcc -g -c get_config_file.c $(GLIB_DIR) 
+	gcc -o get_config_file get_config_file.o $(GLIB_LIB)
+
 clean:
-	rm -rf test test_glib *.o util str binlog
+	rm -rf test test_glib *.o util str binlog get_config_file
