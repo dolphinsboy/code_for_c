@@ -12,12 +12,18 @@ c or c plus code demo/test
 
 **参数修改，且保留注释**
 ```bash
-[guosong@dev-00 glib]$ ./get_config_file test.conf 
+[guosong@dev-00 glib]$ more test.conf 
+[MySQL_Proxy_Layer]
+#端口
+port            =   4001
+log_level       =   15
+log_file        =   ./test.log
+[guosong@dev-00 glib]$ ./get_config_file test.conf  
 group_name=MySQL_Proxy_Layer
 key=port, value=4001
 key=log_level, value=15
 key=log_file, value=./test.log
-[guosong@dev-00 glib]$ more test.conf 
+[guosong@dev-00 glib]$ more test.conf               
 [MySQL_Proxy_Layer]
 #端口
 port=5000
