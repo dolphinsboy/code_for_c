@@ -41,7 +41,7 @@ struct config* get_config_fromfile(char *conf_file)
         return NULL;
     }
 
-    if (FALSE == g_key_file_load_from_file(key_file, conf_file, G_KEY_FILE_KEEP_COMMENTS, &gerror))
+    if (FALSE == g_key_file_load_from_file(key_file, conf_file, G_KEY_FILE_KEEP_COMMENTS|G_KEY_FILE_KEEP_TRANSLATIONS, &gerror))
     {
         printf("g_key_file_load_from_file false, Error=%s,file=%s\n", gerror->message,conf_file);
         return NULL;
