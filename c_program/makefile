@@ -1,3 +1,5 @@
+FLAG=-DVERSION="\"1.3.2.1\"" 
+
 wc:wc.c
 	gcc -g -c wc.c
 	gcc -o wc wc.o
@@ -11,3 +13,11 @@ getopt:getopt.c
 getopt_long:getopt_long.c
 	gcc -g -c getopt_long.c
 	gcc -o getopt_long getopt_long.o
+
+standard_predefined_macro:standard_predefined_macro.c
+	gcc $(FLAG) -g -c standard_predefined_macro.c
+	gcc -o standard_predefined_macro standard_predefined_macro.o
+
+test_snprintf:test_snprintf.c
+	gcc -g -c test_snprintf.c
+	gcc -o test_snprintf test_snprintf.o
