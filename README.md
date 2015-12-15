@@ -12,11 +12,10 @@ Glib相关demo
 
 ###2、Getopt
 + getopt参数解析相关的demo
-
-参数解析还有其他的功能:
 + argp
 + suboptions
 
+参数解析还有其他的功能:
 [http://www.gnu.org/software/libc/manual/html_node/Getopt.html](http://www.gnu.org/software/libc/manual/html_node/Getopt.html)
 
 
