@@ -31,6 +31,45 @@ log_level=15
 log_file=./test.log
 ```
 
+上面的方式会使配置文件的格式变掉，故修改源码：
+
+```c
+函数g_key_file_to_data
+
+//进行格式化处理
+g_string_append_printf (data_string, "%-15s = %s\n", pair->key, pair->value);
+
+```
+
+```bash
+[guosong@dev-00 glib]$ more test.conf 
+[MySQL_Proxy_Layer]
+#端口
+port            = 4001
+
+#日志level
+#默认为15
+log_level       = 15
+
+#日志文件位置
+log_file        = ./test.log
+[guosong@dev-00 glib]$ ./get_config_file ./test.conf 
+group_name=MySQL_Proxy_Layer
+key=port, value=4001
+key=log_level, value=15
+key=log_file, value=./test.log
+[guosong@dev-00 glib]$ more test.conf 
+[MySQL_Proxy_Layer]
+#端口
+port            = 5000
+
+#日志level
+#默认为15
+log_level       = 15
+
+#日志文件位置
+log_file        = ./test.log
+```
 Glib相关demo
 
 ###2、Getopt
