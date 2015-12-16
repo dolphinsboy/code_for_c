@@ -11,7 +11,7 @@ dlname='libgio-2.0.so.0'
 library_names='libgio-2.0.so.0.4600.2 libgio-2.0.so.0 libgio-2.0.so'
 
 # The name of the static archive.
-old_library=''
+old_library='libgio-2.0.a'
 
 # Linker flags that can not go in dependency_libs.
 inherited_linker_flags=''

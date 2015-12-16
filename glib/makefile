@@ -1,5 +1,5 @@
 GLIB_DIR = -I ./glib/include/glib-2.0 -I ./glib/lib/glib-2.0/include
-GLIB_LIB = -L ./glib/lib/ -pthread -lgthread-2.0 -lglib-2.0 
+GLIB_LIB = -L ./glib/lib/ -pthread -lgthread-2.0 -lglib-2.0 glib/lib/libglib-2.0.a
 MYSQL_LIB = -L/data1/guosong/mysql5616/lib/ -l mysqlclient
 MYSQL_INCLUDE = -I /data1/guosong/mysql5616/include
 

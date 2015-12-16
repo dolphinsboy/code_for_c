@@ -11,7 +11,7 @@ dlname='libgthread-2.0.so.0'
 library_names='libgthread-2.0.so.0.4600.2 libgthread-2.0.so.0 libgthread-2.0.so'
 
 # The name of the static archive.
-old_library=''
+old_library='libgthread-2.0.a'
 
 # Linker flags that can not go in dependency_libs.
 inherited_linker_flags=''
