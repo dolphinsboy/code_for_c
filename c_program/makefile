@@ -21,6 +21,9 @@ standard_predefined_macro:standard_predefined_macro.c
 test_snprintf:test_snprintf.c
 	gcc -g -c test_snprintf.c
 	gcc -o test_snprintf test_snprintf.o
+strstr:strstr.c
+	gcc -g -c strstr.c
+	gcc -o strstr strstr.o
 
 clean:
 	rm -rf *.o wc getline getopt getopt_long standard_predefined_macro test_snprintf
