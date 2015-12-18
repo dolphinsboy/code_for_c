@@ -74,6 +74,8 @@ struct config* get_config_fromfile(char *conf_file)
            {
                g_key_file_set_int64(key_file, groups[i], keys[j], 5000);
            }
+
+           free(value);
        }
     }
 

@@ -31,5 +31,17 @@ int main(int argc, char *argv[])
     const char *port = "4002";
     printf("port=%d\n", strtoul(port,NULL, 10));
 
+    char p_str[10];
+    snprintf(p_str, 10, "%s","xxddssdddddxxxsssseee");
+
+    printf("%s\n", p_str);
+
+    char a_arr[]="dxxeegassgss";
+    char b_arr[5];
+
+    strncpy(b_arr, a_arr, 5);
+
+    printf("strncpy=%s\n", b_arr);
+
     return 0;
 }

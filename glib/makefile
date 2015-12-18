@@ -27,5 +27,9 @@ get_config_file:get_config_file.c
 	gcc -g -c get_config_file.c $(GLIB_DIR) 
 	gcc -o get_config_file get_config_file.o $(GLIB_LIB)
 
+hash_test:hash_test.c
+	gcc -g -c hash_test.c $(GLIB_DIR)
+	gcc -o hash_test hash_test.o $(GLIB_LIB)
+
 clean:
 	rm -rf test test_glib *.o util str binlog get_config_file
