@@ -24,5 +24,11 @@ int main(int argc, char *argv[])
 
    g_hash_table_foreach(ht, print_pair, NULL);
 
+   char *p = g_hash_table_lookup(ht, "C");
+
+   if(p!=NULL){
+       printf("value=%s\n", p);
+   }
+
     return 0;
 }

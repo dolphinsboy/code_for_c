@@ -26,5 +26,9 @@ string:string.c
 	gcc -g -c string.c
 	gcc -o string string.o
 
+file_stat:file_stat.c
+	gcc -g -c file_stat.c
+	gcc -o file_stat file_stat.o
+
 clean:
-	rm -rf *.o wc getline getopt getopt_long standard_predefined_macro test_snprintf
+	rm -rf *.o wc getline getopt getopt_long standard_predefined_macro test_snprintf file_stat

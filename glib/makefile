@@ -31,5 +31,9 @@ hash_test:hash_test.c
 	gcc -g -c hash_test.c $(GLIB_DIR)
 	gcc -o hash_test hash_test.o $(GLIB_LIB)
 
+str_hash:str_hash.c
+	gcc -g -c str_hash.c $(GLIB_DIR)
+	gcc -o str_hash str_hash.o $(GLIB_LIB)
+
 clean:
-	rm -rf test test_glib *.o util str binlog get_config_file
+	rm -rf test test_glib *.o util str binlog get_config_file hash_test
