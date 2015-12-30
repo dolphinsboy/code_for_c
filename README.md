@@ -1,6 +1,8 @@
 ## code\_for_c
 c or c plus code demo/test
 
++ 文件的stat分析,解析修改时间
+
 ###1、Glib
 
 +  glib+mysql
