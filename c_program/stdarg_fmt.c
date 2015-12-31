@@ -4,8 +4,9 @@
 #include <stdarg.h>
 
 /*
- *help:
+ *help doc:
  *http://en.cppreference.com/w/c/variadic
+ *https://www.eskimo.com/~scs/cclass/int/sx11b.html
  */
 void simple_printf(const char *fmt, ...)
 {
