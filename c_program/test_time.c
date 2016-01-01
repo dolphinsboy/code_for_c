@@ -4,11 +4,12 @@
 
 //获取微秒数
 /*
- *struct timeval {
- *time_t      tv_sec;     // seconds 
- *suseconds_t tv_usec;    // microseconds 
- *};
+ struct timeval {
+ time_t      tv_sec;     // seconds 
+ suseconds_t tv_usec;    // microseconds 
+ };
 */
+
 inline int getuseconds()
 {
     struct timeval tm;
