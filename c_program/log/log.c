@@ -25,6 +25,7 @@ inline int my_fopen(t_logger *logger, int log_type){
     int fd;
     char *filepath;
     int fmod;
+    int fattr;
 
     switch(log_type){
         case 1:
@@ -39,8 +40,9 @@ inline int my_fopen(t_logger *logger, int log_type){
     }
 
 
-    fmod =  O_RDWR | O_APPEND | O_CREAT, S_IROTH | S_IRGRP | S_IRUSR | S_IWUSR;
-    fd = open(filepath, fmod);
+    fmod =  O_RDWR | O_APPEND | O_CREAT ;
+    fattr = S_IROTH | S_IRGRP | S_IRUSR | S_IWUSR ;
+    fd = open(filepath, fmod, fattr);
     if ( 0 > fd) {
         printf("open log file failed: %s\n", strerror(errno));
         return -1;
@@ -262,6 +264,8 @@ inline int one_log_check(t_logger *logger, const char *log_filename, const int l
         if( -1 == my_fopen(logger, 0))
             return -1;
     }
+
+    return 0;
 }
 
 inline int log_check(t_logger *logger, int log_type){
@@ -322,7 +326,7 @@ extern void log_write(t_logger *logger, int log_type, int level_num, const char 
 
 void log_work(t_logger *logger, int type)
 {
-    log_write(logger, 0, 0x04, "%s", "Hello Log");
+    log_write(logger, 0, 0x04, " %s\n", "Hello Log XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 }
 
 /*void log_work(t_logger *logger, network_socket *client, int type){
