@@ -30,5 +30,9 @@ file_stat:file_stat.c
 	gcc -g -c file_stat.c
 	gcc -o file_stat file_stat.o
 
+stdarg_fmt:stdarg_fmt.c
+	gcc -g -c stdarg_fmt.c
+	gcc -o stdarg_fmt stdarg_fmt.o
+
 clean:
 	rm -rf *.o wc getline getopt getopt_long standard_predefined_macro test_snprintf file_stat

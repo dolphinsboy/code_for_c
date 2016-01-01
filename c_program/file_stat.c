@@ -29,7 +29,7 @@ int main()
 {
     struct stat conf_s;
 
-    char *conf_path = "/home/guosong/code/code_for_c/c_program/string.c";
+    char *conf_path = "./string.c";
     char *p = NULL;
 
     if(0 != stat(conf_path, &conf_s)){
