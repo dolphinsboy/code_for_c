@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    logger_work(logger, 1);
+    log_work(logger, 1);
 
     return 0;
 

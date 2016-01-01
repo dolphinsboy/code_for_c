@@ -3,4 +3,4 @@ log.o:log.c
 
 test:test.c log.o
 	gcc -g -c test.c
-	gcc -o test test.o
+	gcc -o test test.o log.o
