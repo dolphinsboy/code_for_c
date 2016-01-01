@@ -30,9 +30,17 @@ file_stat:file_stat.c
 	gcc -g -c file_stat.c
 	gcc -o file_stat file_stat.o
 
+<<<<<<< HEAD
 stdarg_fmt:stdarg_fmt.c
 	gcc -g -c stdarg_fmt.c
 	gcc -o stdarg_fmt stdarg_fmt.o
+=======
+time:time.c
+	gcc -g -c time.c
+	gcc -o time time.o
+>>>>>>> 7eac39df8c636f122fb8398b05d54a5d8336d887
 
 clean:
-	rm -rf *.o wc getline getopt getopt_long standard_predefined_macro test_snprintf file_stat
+	rm -rf *.o wc getline getopt getopt_long \
+		standard_predefined_macro test_snprintf file_stat \
+		time

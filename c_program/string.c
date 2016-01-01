@@ -4,7 +4,37 @@
 
 #define CONFIG_MPL_PORT "port"
 
+void test_string_function1();
+void test_string_function2();
+
 int main(int argc, char *argv[])
+{
+
+    //test_string_function1();
+    test_string_function2();
+    return 0;
+}
+
+void test_string_function2()
+{
+    //duplicat a string
+    const char *astr= "Test123456789";
+    char *p = strdup(astr);
+    printf("strdup=%s\n",p);
+
+    //strncat
+    char *bstr = (char *)malloc(8);
+    strncat(bstr, astr, 8);
+    printf("str8cat=%s\n", bstr);
+
+    if(p != NULL)
+        free(p);
+    if (bstr != NULL)
+        free(bstr);
+
+}
+
+void test_string_function1()
 {
     const char *astr = "Test";
     const char *bstr = "Test bBB";
@@ -42,6 +72,4 @@ int main(int argc, char *argv[])
     strncpy(b_arr, a_arr, 5);
 
     printf("strncpy=%s\n", b_arr);
-
-    return 0;
 }
