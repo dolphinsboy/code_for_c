@@ -6,6 +6,7 @@
 #include <stdarg.h>
 //变参数
 #include <unistd.h>
+#include <sys/stat.h>
 
 #define LOG_NONE_LEVEL 0
 #define LOG_ERROR_LEVEL 1

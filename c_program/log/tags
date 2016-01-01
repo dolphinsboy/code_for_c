@@ -1,0 +1,56 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+LEFT_LOG_SQL_LEN	log.h	23;"	d
+LOG_BUF_SIZE	log.h	25;"	d
+LOG_DEBUG	log.h	18;"	d
+LOG_DEBUG_LEVEL	log.h	15;"	d
+LOG_ERROR	log.h	19;"	d
+LOG_ERROR_LEVEL	log.h	11;"	d
+LOG_LOAD	log.h	20;"	d
+LOG_LOAD_LEVEL	log.h	14;"	d
+LOG_NONE_LEVEL	log.h	10;"	d
+LOG_WARNING_LEVEL	log.h	12;"	d
+LOG_WORK	log.h	17;"	d
+LOG_WORK_LEVEL	log.h	13;"	d
+LOG_WORK_TYPE_CONN	log.h	/^    LOG_WORK_TYPE_CONN,$/;"	e	enum:__anon1
+LOG_WORK_TYPE_QUERY	log.h	/^    LOG_WORK_TYPE_QUERY,$/;"	e	enum:__anon1
+LOG_WORK_TYPE_QUIT	log.h	/^    LOG_WORK_TYPE_QUIT$/;"	e	enum:__anon1
+MAX_LOG_SQL_LEN	log.h	22;"	d
+RIGHT_LOG_SQL_LEN	log.h	24;"	d
+_LOG_H_	log.h	2;"	d
+fd	log.h	/^    int fd;$/;"	m	struct:__anon2
+getuseconds	log.c	/^inline long getuseconds(){$/;"	f
+load_fd	log.h	/^    int load_fd;$/;"	m	struct:__anon2
+load_log_filepath	log.h	/^    char *load_log_filepath;$/;"	m	struct:__anon2
+load_log_filepath_tmp	log.h	/^    char *load_log_filepath_tmp;$/;"	m	struct:__anon2
+load_log_inode	log.h	/^    ino_t load_log_inode;$/;"	m	struct:__anon2
+log_check	log.c	/^inline int log_check(t_logger *logger, int log_type){$/;"	f
+log_debug	log.h	80;"	d
+log_dir	log.h	/^    char *log_dir;$/;"	m	struct:__anon2
+log_error	log.h	67;"	d
+log_filename	log.h	/^    char *log_filename;$/;"	m	struct:__anon2
+log_filepath	log.h	/^    char *log_filepath;$/;"	m	struct:__anon2
+log_filepath_tmp	log.h	/^    char *log_filepath_tmp;$/;"	m	struct:__anon2
+log_inode	log.h	/^    ino_t log_inode;$/;"	m	struct:__anon2
+log_level	log.h	/^    int log_level;$/;"	m	struct:__anon2
+log_load	log.h	77;"	d
+log_warning	log.h	72;"	d
+log_work	log.c	/^void log_work(t_logger *logger, int type)$/;"	f
+log_work_type	log.h	/^} log_work_type;$/;"	v	typeref:enum:__anon1
+log_write	log.c	/^extern void log_write(t_logger *logger, int log_type, int level_num, const char *fmt, ...){$/;"	f
+logger	log.h	/^t_logger *logger;$/;"	v
+logger_close	log.c	/^extern void logger_close(t_logger *logger){$/;"	f
+logger_create	log.c	/^struct t_logger * logger_create(char *log_dir, char *log_filename, int maxsize, int log_level){$/;"	f
+maxsize	log.h	/^    unsigned long int maxsize;$/;"	m	struct:__anon2
+my_fclose	log.c	/^inline void my_fclose(t_logger *logger, int log_type){$/;"	f
+my_fopen	log.c	/^inline int my_fopen(t_logger *logger, int log_type){$/;"	f
+one_log_check	log.c	/^inline int one_log_check(t_logger *logger, const char *log_filename, const int log_fd, const ino_t log_ino)$/;"	f
+t_logger	log.h	/^} t_logger;$/;"	t	typeref:struct:__anon2
+werror_fd	log.h	/^    int werror_fd;$/;"	m	struct:__anon2
+werror_log_filepath	log.h	/^    char *werror_log_filepath;$/;"	m	struct:__anon2
+werror_log_filepath_tmp	log.h	/^    char *werror_log_filepath_tmp;$/;"	m	struct:__anon2
+werror_log_inode	log.h	/^    ino_t werror_log_inode;$/;"	m	struct:__anon2

@@ -4,6 +4,7 @@
 #include <time.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -30,7 +31,7 @@ inline int my_fopen(t_logger *logger, int log_type){
             filepath = logger->werror_log_filepath;
             break;
         case 0:
-            filepath = logger->filepath;
+            filepath = logger->log_filepath;
             break;
         case 2:
             filepath = logger->load_log_filepath;
@@ -38,7 +39,7 @@ inline int my_fopen(t_logger *logger, int log_type){
     }
 
 
-    fmod =  O_RDWR | O_APPEND | O_CREATE, S_IROTH | S_IRGRP | S_IRUSR | S_IWUSR;
+    fmod =  O_RDWR | O_APPEND | O_CREAT, S_IROTH | S_IRGRP | S_IRUSR | S_IWUSR;
     fd = open(filepath, fmod);
     if ( 0 > fd) {
         printf("open log file failed: %s\n", strerror(errno));
@@ -70,7 +71,7 @@ inline int my_fopen(t_logger *logger, int log_type){
     return 0;
 }
 
-struct t_logger * logger_create(char *log_dir, char *log_filename, int maxsize, int log_level){
+extern t_logger * logger_create(char *log_dir, char *log_filename, int maxsize, int log_level){
     if (NULL == log_dir || NULL == log_filename || maxsize <= 0){
         printf("logger_create() failed, may be log_dir == NULL or log_filename == NULL or maxsize=%d <=0", maxsize);
         return NULL;
@@ -84,7 +85,7 @@ struct t_logger * logger_create(char *log_dir, char *log_filename, int maxsize, 
     }
 
 
-    #1048576=1024*1024=1M,配置文件中参数为1800，即日志大小为1.8G
+    //1048576=1024*1024=1M,配置文件中参数为1800，即日志大小为1.8G
     logger->maxsize = (unsigned long int)(maxsize) * (unsigned long int)(1048576);
 
     if ( NULL == (logger->log_dir = strdup(log_dir))){
@@ -115,7 +116,7 @@ struct t_logger * logger_create(char *log_dir, char *log_filename, int maxsize, 
         logger_close(logger);
         return NULL;
     }
-    strncat(looger->log_file_tmp, loggger->log_filepath, strlen(logger->log_filepath));
+    strncat(logger->log_filepath_tmp, logger->log_filepath, strlen(logger->log_filepath));
     logger->log_filepath_tmp[len + 4 - 1] = '\0';
 
     if ( -1 == my_fopen(logger, 0)){
@@ -152,11 +153,11 @@ struct t_logger * logger_create(char *log_dir, char *log_filename, int maxsize, 
 
     strncat(logger->load_log_filepath, log_dir, strlen(log_dir));
     strncat(logger->load_log_filepath, "/", 1);
-    strncat(logger->load_log_filepath, log_file, strlen(log_filename));
+    strncat(logger->load_log_filepath, log_filename, strlen(log_filename));
     strncat(logger->load_log_filepath, load_suffix, strlen(load_suffix));
     logger->load_log_filepath[load_len -1] = '\0';
 
-    if (NULL == (logger->load_log_file_path_tmp = calloc(1, load_len + 4))){
+    if (NULL == (logger->load_log_filepath_tmp = calloc(1, load_len + 4))){
         logger_close(logger);
         return NULL;
     }
@@ -181,7 +182,7 @@ extern void logger_close(t_logger *logger){
     if ( logger->werror_fd >= 0) close(logger->werror_fd);
     if ( logger->load_fd >= 0) close(logger->load_fd);
 
-    if( NULL != logger->log_dir) free(logger->load_dir);
+    if( NULL != logger->log_dir) free(logger->log_dir);
     if( NULL != logger->log_filename) free(logger->log_filename);
     if( NULL != logger->log_filepath) free(logger->log_filepath);
     if( NULL != logger->werror_log_filepath) free(logger->werror_log_filepath);
@@ -200,4 +201,197 @@ inline long getuseconds(){
 }
 
 
+inline void my_fclose(t_logger *logger, int log_type){
+    switch(log_type){
+        case 0:
+            if(logger->fd >= 0){
+                close(logger->fd);
+                logger->fd = -1;
+            }
+            logger->log_inode=0;
+            break;
+        case 1:
+            if(logger->werror_fd >= 0){
+                close(logger->werror_fd);
+                logger->werror_fd = -1;
+            }
+            logger->werror_log_inode = 0;
+            break;
+        case 2:
+            if(logger->load_fd >= 0){
+                close(logger->load_fd);
+                logger->load_fd = -1;
+            }
 
+            logger->load_log_inode = 0;
+    }
+}
+
+
+inline int one_log_check(t_logger *logger, const char *log_filename, const int log_fd, const ino_t log_ino)
+{
+    struct stat st;
+
+    if ( -1 == stat(log_filename, &st)){
+        if ( log_fd >= 0 )
+            my_fclose(logger, 0);
+        if( -1 == my_fopen(logger, 0))
+            return -1;
+        return 0;
+    }else if( st.st_ino != log_ino){
+        if ( log_fd >= 0 )
+            my_fclose(logger, 0);
+        if ( -1 == my_fopen(logger, 0))
+            return -1;
+        if ( -1 == stat(log_filename, &st))
+            return -1;
+    }
+
+    if ( st.st_size >= logger->maxsize){
+        my_fclose(logger, 0);
+
+        struct tm *tm_ptr;
+        time_t the_time;
+        char buf[256];
+        (void)time(&the_time);
+        tm_ptr=localtime(&the_time);
+        snprintf(buf, 256, "%s.%d%02d%02d%02d%02d%02d", log_filename, tm_ptr->tm_year + 1900,
+                tm_ptr->tm_mon+1, tm_ptr->tm_mday, tm_ptr->tm_hour, tm_ptr->tm_min, tm_ptr->tm_sec);
+
+        rename(log_filename, buf);
+        if( -1 == my_fopen(logger, 0))
+            return -1;
+    }
+}
+
+inline int log_check(t_logger *logger, int log_type){
+    struct stat st;
+    int ret;
+
+    switch(log_type){
+        case 0:
+            ret = one_log_check(logger, logger->log_filepath, 
+                                logger->fd, logger->log_inode);
+            break;
+        case 1:
+            ret = one_log_check(logger, logger->werror_log_filepath,
+                                logger->werror_fd, logger->werror_log_inode);
+            break;
+        case 2:
+            ret = one_log_check(logger, logger->load_log_filepath, 
+                                logger->load_fd, logger->load_log_inode);
+            break;
+    }
+
+    return ret;
+}
+
+
+extern void log_write(t_logger *logger, int log_type, int level_num, const char *fmt, ...){
+    if ( 0 != log_check(logger, log_type)){
+        return;
+    }
+
+    if ( ( level_num & logger->log_level) == 0){
+        return;
+    }
+
+    va_list args;
+    va_start(args, fmt);
+
+    char buf[LOG_BUF_SIZE];
+    bzero(buf, LOG_BUF_SIZE);
+
+    struct timeval time;
+    gettimeofday(&time, 0);
+
+    time_t t = time.tv_sec;
+    struct tm*tm = localtime(&t);
+
+    snprintf(buf, sizeof(buf), "[%d-%02d-%02d %02d:%02d:%02d.%06ld]",
+             1900 + tm->tm_year, 1 + tm->tm_mon,
+             tm->tm_mday, tm->tm_hour, tm->tm_min, tm->tm_sec, time.tv_usec);
+    vsnprintf(buf + strlen(buf), sizeof(buf) - strlen(buf) - 2, fmt, args);
+
+    buf[LOG_BUF_SIZE - 1] = '\x00';
+
+    int fd = (log_type == 1) ? logger->werror_fd:(log_type == 0) ? logger->fd : logger->load_fd;
+    write(fd, buf, strlen(buf));
+    va_end(args);
+}
+
+void log_work(t_logger *logger, int type)
+{
+    log_write(logger, 0, 0x04, "%s", "Hello Log");
+}
+
+/*void log_work(t_logger *logger, network_socket *client, int type){
+    if(client == NULL || (client->is_client_socket == 0 && client->server == NULL)){
+        log_error(logger, "log work failed, client == NULL");
+        return;
+    }
+
+    if(client->is_client_socket == 0){
+        client = client->client;
+    }
+
+    network_socket *server = client->server;
+    char *c_ip = client->ip[0] == '\0' ? "unknow" : client->ip;
+    int c_port = client->port;
+    char *c_username = client->p_user == NULL ? "" : client->p_user->username;
+    char *s_ip = server == NULL || server->db == NULL ? "self" : server->db->addr.addr_name;
+    int s_port = server == NULL || server->db == NULL ? -1 : server->db->addr.port;
+    int s_thread_id = server == NULL ? -1 :server->handshake.thread_id;
+    gunit64 affected_row = client->result.qstatus.affected_rows;
+    gunit64 packet_size = client->result.result_set_size;
+
+    if(client->query.result_read_time.tv_sec < client->query.query_send_time.tv_sec ||
+            (client->query.result_read_time.tv_sec == client->query.query_sent_time.tv_sec &&
+             client->query.result_read_time.tv_usec < client->query.query_sent_time.tv_usec))
+        client->query.result_read_time = client->query.query_sent_time;
+
+    long query_sent_us = (client->query.query_sent_time.tv_sec - client->query.start_time.tv_sec) * 1000000
+        + client->query.query_sent_time.tv_usec - client->query.start_time.tv_usec;
+
+    if(query_sent_us<0)
+        query_sent_us = 0;
+
+    long result_read_us = (client->query.result_read_time.tv_sec - client->query.query_sent_time.tv_sec) * 1000000 + client->query.end_time.tv_usec - client->query.result_read_time.tv_usec;
+
+    if(result_sent_us < 0)
+        result_sent_us = 0;
+
+    long total_cost_us = query_sent_us + result_read_us + result_sent_us;
+
+    char log_cmd[MAX_LOG_SQL_LEN];
+
+    char *str_type;
+
+    if(type == LOG_WORK_TYPE_CONN){
+        str_type = "CONN";
+        total_cost_us = result_sent_us = result_read_us = query_sent_us = 0;
+        affected_rows = packet_size = 0;
+        snprintf(log_cmd, MAX_LOG_SQL_LEN, "%s", "connect");
+    }else if(type == LOG_WORK_TYPE_QUIT){
+        str_type = "QUIT";
+        total_cost_us = result_sent_us = result_read_us = query_sent_us = 0;
+        affected_rows = packet_size = 0;
+        snprintf(log_cmd, MAX_LOG_SQL_LEN, "%s", "quit");
+    }else{
+        str_type = "QURY";
+        if(client->query.query_command == "\x03" || client->query.command == '\x16')
+            truncate_str_two_ends(log_cmd, client->query.args, client->query.args_len-1);
+        else
+            snprintf(log_cmd, MAX_LOG_SQL_LEN, "COMMAD=%ld",client->query.command);
+    }
+    // [client_ip:client:port:client_thread_id:product_user][server_ip:server_port:server_thread_id]
+    // [time1/time2/time3/time_total/unused_field][rows/pack_size/unused_field/unused_field/unused_field]
+    // [unused_field] SQL
+    //
+
+    log_write(logger, 0, 0x04, "[%s][%s:%d:%d:%s][%s:%d:%d][%ld/%ld/%ld/%ld/%d][%d/%d/%d/%d/%d][%s] %s\n",
+            str_type, c_ip, c_port, 0, c_username, s_ip, s_port, s_thread_id, query_sent_us, result_read_us,
+            result_client_us, total_cost_us, 0, affected_rows, packet_size, 0, 0, 0, "",log_cmd);
+
+}
+*/
