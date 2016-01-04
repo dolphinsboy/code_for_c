@@ -36,7 +36,10 @@ stdarg_fmt:stdarg_fmt.c
 test_time:test_time.c
 	gcc -g -c test_time.c
 	gcc -o test_time test_time.o
+test_mmap:test_mmap.c
+	gcc -g -c test_mmap.c
+	gcc -o test_mmap test_mmap.o
 clean:
 	rm -rf *.o wc getline getopt getopt_long \
 		standard_predefined_macro test_snprintf file_stat \
-		test_time
+		test_time test_mmap
