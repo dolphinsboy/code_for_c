@@ -5,6 +5,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/*
+ *  mmap, munmap - map or unmap files or devices into memory
+ *
+ */
+
 #define handle_error(msg) \
     do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
