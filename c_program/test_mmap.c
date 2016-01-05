@@ -8,6 +8,8 @@
 /*
  *  mmap, munmap - map or unmap files or devices into memory
  *
+ *  http://kenby.iteye.com/blog/1164700
+ *
  */
 
 #define handle_error(msg) \
