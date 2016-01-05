@@ -83,3 +83,6 @@ Glib相关demo
 [http://www.gnu.org/software/libc/manual/html_node/Getopt.html](http://www.gnu.org/software/libc/manual/html_node/Getopt.html)
 
 
+###3、APUE相关代码
+
+按照章节梳理APUE各章代码[https://github.com/dolphinsboy/code_for_c/tree/master/apue_code/](https://github.com/dolphinsboy/code_for_c/tree/master/apue_code/)
