@@ -39,7 +39,20 @@ test_time:test_time.c
 test_mmap:test_mmap.c
 	gcc -g -c test_mmap.c
 	gcc -o test_mmap test_mmap.o
+
+mmap_test1:mmap_test1.c
+	gcc -g -c mmap_test1.c
+	gcc -o mmap_test1 mmap_test1.o
+mmap_A:mmap_A.c
+	gcc -g -c mmap_A.c
+	gcc -o mmap_A mmap_A.o
+mmap_B:mmap_A.c
+	gcc -g -c mmap_B.c
+	gcc -o mmap_B mmap_B.o
+mmap_subprocess:mmap_subprocess.c
+	gcc -g -c mmap_subprocess.c
+	gcc -o mmap_subprocess mmap_subprocess.o
 clean:
 	rm -rf *.o wc getline getopt getopt_long \
 		standard_predefined_macro test_snprintf file_stat \
-		test_time test_mmap
+		test_time test_mmap mmap_* mmap_subprocess 
