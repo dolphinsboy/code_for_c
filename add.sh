@@ -2,7 +2,13 @@ cd  glib && make clean
 cd ..
 cd c_program && make clean
 cd ..
-cd apue_code && make clean
+cd apue_code 
+
+for dir in `ls`
+do
+    cd $dir && make clean
+    cd ..
+done
 cd ..
 git pull
 git add .
