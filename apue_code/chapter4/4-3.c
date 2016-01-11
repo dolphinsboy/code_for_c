@@ -15,3 +15,8 @@ int main(void)
         err_sys("create error for bar");
     exit(0);
 }
+
+/*
+ * -rw-------  1 guosong  staff     0B  1 11 16:19 bar
+ * -rw-rw-rw-  1 guosong  staff     0B  1 11 16:19 foo
+ */
