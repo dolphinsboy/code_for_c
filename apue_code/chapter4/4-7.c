@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     if (ntot == 0)
         ntot = 1;
 
-    printf("nreg = %d, ndir = %d, ntot = %d\n", ntot);
+    printf("nreg = %ld, ndir = %ld, ntot = %ld\n", nreg, ndir, ntot);
 
     exit(ret);
 }
