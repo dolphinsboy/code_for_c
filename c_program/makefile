@@ -20,8 +20,11 @@ mmap_B:mmap_A.c
 mmap_subprocess:mmap_subprocess.c
 test_open:test_open.c
 test_typedef:test_typedef.c
+test_fork:test_fork.c
+file_read:file_read.c
+
 clean:
 	rm -rf *.o wc getline getopt getopt_long \
 		standard_predefined_macro test_snprintf file_stat \
 		test_time test_mmap mmap_* mmap_subprocess test_open tmp.txt \
-		test_typedef
+		test_typedef test_fork file_read
