@@ -12,6 +12,7 @@ int main(void)
 
     if (write(STDOUT_FILENO, buf, sizeof(buf) -1) != sizeof(buf) - 1)
         err_sys("write error");
+    //通过重定向的方式，printf是全缓冲方式，因此父子进程都会打印一条
     printf("before fork\n");
 
     if ((pid = fork()) < 0){
