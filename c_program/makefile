@@ -23,9 +23,10 @@ test_typedef:test_typedef.c
 test_fork:test_fork.c
 file_read:file_read.c
 test_write_binary:test_write_binary.c
+test_fork2:test_fork2.c
 
 clean:
 	rm -rf *.o wc getline getopt getopt_long \
 		standard_predefined_macro test_snprintf file_stat \
 		test_time test_mmap mmap_* mmap_subprocess test_open tmp.txt \
-		test_typedef test_fork file_read test_write_binary
+		test_typedef test_fork file_read test_write_binary test_fork2
