@@ -31,10 +31,15 @@ int main(void)
         pid_arry[i] = child_make();
     }
 
+wait_step:
+    wait(NULL);
     for (i = 0; i < 2; i++){
         printf("pid = %d\n", pid_arry[i]);
     }
 
+    if (i >= 2)
+        return 0;
 
+    goto wait_step;
     return 0;
 }
