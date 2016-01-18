@@ -21,6 +21,8 @@ int main(void)
         glob++;
         var++;
     }else{
+        //在fork之后是父进程先执行还是子进程先执行是不确定的，具体取决于内核调度。
+        //sleep 2s并不一定足够
         sleep(2);
     }
 
