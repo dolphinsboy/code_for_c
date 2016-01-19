@@ -16,4 +16,4 @@ LIB=/Users/guosong/Desktop/Sina/Code/unix/lib
 
 clean:
 	rm -rf *.o
-	rm -rf 8-1 8-2 8-4 8-5 8-6 8-7
+	rm -rf 8-1 8-2 8-4 8-5 8-6 8-7 8-7-1
