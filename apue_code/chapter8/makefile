@@ -13,7 +13,9 @@ LIB=/Users/guosong/Desktop/Sina/Code/unix/lib
 8-7-1:8-7-1.c
 	gcc -g -c 8-7-1.c
 	gcc -o 8-7-1 8-7-1.o -L$(LIB) -lapue
+8-8:8-8.c
 
 clean:
 	rm -rf *.o
-	rm -rf 8-1 8-2 8-4 8-5 8-6 8-7 8-7-1
+	rm -rf 8-1 8-2 8-4 8-5 \
+		8-6 8-7 8-7-1 8-8
