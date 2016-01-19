@@ -20,6 +20,9 @@ LIB=/Users/guosong/Desktop/Sina/Code/unix/lib
 8-13:8-13.c 8-3.h 8-12.h
 	gcc -g -c 8-13.c 8-3.h 8-12.h
 	gcc -o 8-13 8-13.o
+8-18:8-18.c 8-3.h 8-12.h
+	gcc -g -c 8-18.c 8-3.h 8-12.h
+	gcc -o 8-18 8-18.o
 
 clean:
 	rm -rf *.o
