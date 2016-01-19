@@ -12,5 +12,9 @@ int main(void)
 
     pr_exit(status);
 
+    if ((status = system("nosuchcommand")) < 0)
+        err_sys("system() error");
+    pr_exit(status);
+
     exit(0);
 }
