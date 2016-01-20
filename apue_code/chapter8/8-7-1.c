@@ -12,7 +12,7 @@ int main(void)
         err_sys("fork error");
     }else if(pid == 0){
         charatatime("output from child\n");
-        TELL_PARENT(getppid()); //父进程先行
+        TELL_PARENT(getppid()); //子进程先行
     }else{
         WAIT_CHILD();
         charatatime("output from parent\n");
