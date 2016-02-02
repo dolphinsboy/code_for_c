@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-#define IPADDRESS "127.0.0.1"
+#define IPADDRESS "10.30.6.49"
 #define PORT 8787
 #define MAXSIZE 1024
 #define LISTENQ 5
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     int listenfd;
 
     listenfd = socket_bind(IPADDRESS, PORT);
-    listen(listenfd.LISTENQ);
+    listen(listenfd,LISTENQ);
 
     do_epoll(listenfd);
 
@@ -76,7 +76,7 @@ static int socket_bind(const char *ip, int port)
 static void do_epoll(int listenfd)
 {
     int epollfd;
-    struct epoll event events[EPOLLEVENTS];
+    struct epoll_event events[EPOLLEVENTS];
 
     int ret;
     char buf[MAXSIZE];
