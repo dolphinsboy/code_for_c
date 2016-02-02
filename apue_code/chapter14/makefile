@@ -12,7 +12,10 @@ LIB=/Users/guosong/Desktop/Sina/Code/unix/lib
 	gcc -o 14-6 14-6.o -L$(LIB) -lapue
 
 14-8:14-8.c
+14-10:14-10.c
+
+test_epoll:test_epoll.c
 
 clean:
 	rm -rf *.o
-	rm -rf 14-1 14-4 14-6
+	rm -rf 14-1 14-4 14-6 test_epoll
