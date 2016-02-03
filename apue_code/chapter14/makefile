@@ -16,6 +16,8 @@ LIB=/Users/guosong/Desktop/Sina/Code/unix/lib
 
 test_epoll:test_epoll.c
 
+14-12:14-12.c
+
 clean:
 	rm -rf *.o
-	rm -rf 14-1 14-4 14-6 test_epoll
+	rm -rf 14-1 14-4 14-6 test_epoll 14-12
