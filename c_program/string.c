@@ -73,3 +73,21 @@ void test_string_function1()
 
     printf("strncpy=%s\n", b_arr);
 }
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    char *addr = "10.30.6.217:53401";
+    char ip[16];
+    int port;
+
+    sscanf(addr,"%[^:]:%d", ip, &port);
+
+    printf("ip = %s, port = %d\n", ip, port);
+
+    return 0;
+}
