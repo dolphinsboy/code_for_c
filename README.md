@@ -1,9 +1,9 @@
-## code\_for_c
+###1、 基本功能Demo
 c or c plus code demo/test
 
 + 文件的stat分析,解析修改时间
 
-###1、Glib
+###2、Glib
 
 +  glib+mysql
 +  glib+thread
@@ -74,7 +74,7 @@ log_file        = ./test.log
 ```
 Glib相关demo
 
-###2、Getopt
+###3、Getopt
 + getopt参数解析相关的demo
 + argp
 + suboptions
@@ -83,3 +83,6 @@ Glib相关demo
 [http://www.gnu.org/software/libc/manual/html_node/Getopt.html](http://www.gnu.org/software/libc/manual/html_node/Getopt.html)
 
 
+###4、APUE相关代码
+
+按照章节梳理APUE各章代码[https://github.com/dolphinsboy/code_for_c/tree/master/apue_code/](https://github.com/dolphinsboy/code_for_c/tree/master/apue_code/)
